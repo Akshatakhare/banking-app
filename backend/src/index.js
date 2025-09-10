@@ -6,6 +6,7 @@ import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@as-integrations/express5";
 import { typeDefs, resolvers } from "./graphql/schema.js";
 import { authMiddleware } from "./middleware/auth.js";
+import accountRoutes from "./routes/accountRoutes.js"
 
 dotenv.config();
 
@@ -20,6 +21,8 @@ const server = new ApolloServer({
 
 const startServer = async () => {
   await server.start();
+
+  app.use('/api/accounts',accountRoutes);
 
   app.use(
     "/graphql",
